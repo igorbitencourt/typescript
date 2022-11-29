@@ -1,5 +1,17 @@
 "use strict";
-function normalizarTexto(texto) {
-    return texto.trim().toLowerCase();
+async function fetchProduto() {
+    const response = await fetch("https://api.origamid.dev/json/notebook.json");
+    const data = await response.json();
+    showProduto(data);
 }
-console.log(normalizarTexto("Vai coMeçAr o JogO da AlEmAnha"));
+fetchProduto();
+function showProduto(data) {
+    document.body.innerHTML = `
+  <div>
+    <h2>${data.nome}</h2>
+    <p>${data.preco}</p>
+    <div>
+      <h3>${data.empresaFabricante.nome}</h3>
+    </div>
+  </div>`;
+}
